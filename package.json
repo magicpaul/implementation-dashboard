@@ -1,6 +1,6 @@
 {
   "name": "implementation-dashboard",
-  "homepage": "https://magicpaul.github.io/implmentation-dashboard/",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
