@@ -8,10 +8,6 @@ import Chart from 'react-apexcharts'
 import config from "./config";
 import UserImg from "../assets/images/wp.jpg";
 
-const url = `https://sheets.googleapis.com/v4/spreadsheets/${
-  config.spreadsheetId
-}/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=${config.apiKey}`;
-
 class App extends Component {
   constructor() {
     super();
