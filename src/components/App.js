@@ -16,71 +16,20 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      items: [],
+      tableData:[],
       options: [],
       series: []
     };
   }
 
-  componentDidMount() {
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        let batchRowValues = data.valueRanges[0].values;
-
-        const rows = [];
-        for (let i = 1; i < batchRowValues.length; i++) {
-          let rowObject = {};
-          for (let j = 0; j < batchRowValues[i].length; j++) {
-            rowObject[batchRowValues[0][j]] = batchRowValues[i][j];
-          }
-          rows.push(rowObject);
-        }
-
-        let totalCalls = rows.length;
-        // setting state
-        console.log(rows);
-        this.setState({
-            items: rows,
-            totalCalls: totalCalls,
-            options: {
-              colors: [function({ value, seriesIndex, w }) {
-                if (value > 66) {
-                    return '#38e6a4'
-                } else if (value > 33) {
-                    return '#febb44'
-                }
-                else{
-                    return '#ff6077'
-                }
-              }],
-              plotOptions: {
-                radialBar: {
-                  hollow: {
-                    margin:15,
-                    size: "10%"
-                  },
-                  track:{
-                    opacity:0.3
-                  },
-                  dataLabels: {
-                    showOn: "always",
-                    name: {
-                      show: false,
-                    },
-                    value: {
-                      show: false
-                    }
-                  }
-                }
-              },
-            
-              stroke: {
-                lineCap: "butt",
-              }
-          }
-        });
-      });
+  async componentDidMount() {
+    const notionTableData = await fetch(
+      "https://notion-api.splitbee.io/v1/table/df4fb5a193c0420d903a19e19b594851"
+    ).then(res => res.json());  
+    this.setState({
+      tableData: notionTableData,
+      options: config.options
+    });
   }
   render() {
     return (
@@ -112,7 +61,7 @@ class App extends Component {
                 </Container>
 
                 <Container className="card-value pt-4 text-x-large">
-                  {this.state.totalCalls}
+                  {this.state.tableData.length}
                   <span className="text-medium pl-2 is-dark-text-light">
                     calls
                   </span>
@@ -135,17 +84,17 @@ class App extends Component {
                         </thead>
                         <tbody>
                           {
-                            this.state.items.map(call => {
+                            this.state.tableData.map((call,index) => {
                               return (
-                                <tr className = {call.calls_complete}>
-                                  <td>{call.calls_client}</td>
-                                  <td>{call.calls_subject}</td>
-                                  <td>{call.calls_agent}</td>
+                                <tr >
+                                  <td>{call.Client}</td>
+                                  <td>{call.Subject}</td>
+                                  <td>{call.Agent}</td>
                                   <td>
                                     <div >
                                       <Chart
                                         options={this.state.options}
-                                        series={[call.calls_progress]}
+                                        series={[call.Progress]}
                                         type="radialBar"
                                         height="100px"
                                         width="100px"
