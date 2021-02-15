@@ -1,6 +1,6 @@
 {
-  "short_name": "Online Retail Dashboard",
-  "name": "Online Retail Dashboard using React, FusionCharts & Bootstrap",
+  "short_name": "Implementation Dashboard",
+  "name": "Implementation Dashboard using React, ApexCharts & Bootstrap",
   "icons": [
     {
       "src": "favicon.ico",
