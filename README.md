@@ -1,4 +1,4 @@
-# Test Dashboard using React, Google Sheets & Boostrap
+# Test Dashboard using React, Google Sheets, ApexCharts & Bootstrap
 
 **Steps to run the project**:
 1. After cloning the repository, use `npm install` to install all the dependencies needed.
